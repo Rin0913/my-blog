@@ -33,23 +33,36 @@ class md_engine():
         return html_text.replace("<flask-render>", intermediate_output)
 
 class rank_engine():
-    def __init__(self, folder):
-        self.folder = folder
+    def ranking(self, folder):
+        all_files = [f for f in os.listdir(folder) if os.path.isfile(os.path.join(folder, f))]
 
-    def ranking(self):
-        all_files = [f for f in os.listdir(self.folder) if os.path.isfile(os.path.join(self.folder, f))]
-
-        all_files.sort(key=lambda x: os.path.getmtime(os.path.join(self.folder, x)), reverse=True)
+        all_files.sort(key=lambda x: os.path.getmtime(os.path.join(folder, x)), reverse=True)
         return all_files
 
-    def generate_markdown_list(self, no=-1):
-        files = self.ranking()
+    def file_ranking(self, folder):
+        all_files = [f for f in os.listdir(folder)]
+
+        all_files.sort(key=lambda x: os.path.getmtime(os.path.join(folder, x)), reverse=True)
+        return all_files
+
+    def generate_markdown_list(self, path, no=-1):
+        files = self.ranking(path)
         text = []
-        remove_extension = lambda filename: os.path.splitext(filename)[0]
         for f in files:
             if no == 0:
                 break
-            f = remove_extension(f)
+            if os.path.splitext(f)[1] != '.md':
+                continue
+            f = os.path.splitext(f)[0]
             text.append(f"[{f}](/a/{f})")
             no -= 1
         return "<hr/>".join(text)
+
+    def generate_file_list(self, path, fake_path):
+        files = self.file_ranking(path)
+        text = ["- [.]({fake_path}/..)"]
+        for f in files:
+            f = os.path.splitext(f)[0]
+            text.append(f"- [{f}](/drive/{fake_path}/{f})")
+        return "\n".join(text)
+

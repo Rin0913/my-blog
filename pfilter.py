@@ -2,14 +2,15 @@ import os
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
-def concatenate(base_dir, path):
-    
-    if not os.path.isabs(base_dir):
-        base_dir = os.path.join(current_directory, base_dir)
+def concatenate(base_path, sub_path):
+	if not os.path.isabs(base_path):
+		base_path = os.path.join(current_directory, base_path)
 
-    path = os.path.join(base_dir, path)
-    if os.path.commonprefix([os.path.realpath(path), base_dir]) == base_dir:
-        return path
-    
-    return None
+	final_path = os.path.abspath(os.path.join(base_path, sub_path))
+
+	base_path = os.path.normpath(base_path)
+	final_path = os.path.normpath(final_path)
+
+	if os.path.commonpath([base_path, final_path]) == base_path:
+		return final_path
 
