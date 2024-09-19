@@ -18,10 +18,15 @@
     </script>
     <script src="/s/prism.js"></script>
     <link href="/s/prism.css" rel="stylesheet" />
+    <link rel="icon" href="/s/icon.ico" type="image/x-icon">
     <style>
         html, body {
             height: 100%;
             margin: 0;
+        }
+        body {
+            background: url('/s/background.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
         img {
             display: block;
@@ -29,23 +34,25 @@
             margin-right: auto;
             width: 100%; 
         }
+		.container-p {
+			background: rgba(255, 255, 255, 0.7);
+		}
         .wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
-
         .content {
             flex: 1;
             padding: 20px;
         }
         .footer {
-            background-color: #333;
             color: white;
             text-align: center;
             padding: 10px;
             position: sticky;
             top: 100vh;
+            align-items: flex-end;
         }
     </style>
 </head>
@@ -71,7 +78,7 @@
             </div>
         </nav>
 
-        <div class="container my-5">
+        <div class="container container-p my-5 pt-1">
             <flask-render>
             <flask-list>
         </div>
