@@ -26,6 +26,16 @@ def list():
     html = controller.generate(rank_engine.generate_markdown_list(config.blog_folder))
     return html
 
+@app.route('/sitemap')
+def sitemap():
+    sitemap = ['/', '/about', '/list']
+    for f in rank_engine.ranking(config.blog_folder):
+        sitemap.append("/a/" + os.path.splitext(f)[0])
+    result = []
+    for i in sitemap:
+        result.append(config.base_url + i)
+    return '\n'.join(result)
+
 @app.route('/drive/', defaults={'subpath': ''})
 @app.route('/drive/<path:subpath>')
 def download(subpath):
