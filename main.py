@@ -39,7 +39,7 @@ def sitemap():
 @app.route('/drive/', defaults={'subpath': ''})
 @app.route('/drive/<path:subpath>')
 def download(subpath):
-    path = pfilter.concatenate("drive", subpath)
+    path = pfilter.concatenate(config.drive_folder, subpath)
     if path == None:
         abort(403)
     try:
@@ -52,7 +52,7 @@ def download(subpath):
 
 @app.route('/a/<string:article>')
 def blog(article):
-    path = pfilter.concatenate("blog", article)
+    path = pfilter.concatenate(config.blog_folder, article)
     if path == None:
         abort(403)
     try:

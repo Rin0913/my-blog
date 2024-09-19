@@ -24,8 +24,9 @@ class controller():
         
         f = lambda x: os.path.splitext(x)[0]
         for i in range(-2, 4):
-            if i == idx: continue
-            if 0 <= idx + i < len(all_files): lst.append(f(all_files[idx + i]))
+            if 0 <= idx + i < len(all_files):
+                if all_files[idx + i] == title: continue
+                lst.append(f(all_files[idx + i]))
         html_text = []
 
         for f in lst:
@@ -80,7 +81,8 @@ class rank_engine():
 
     def generate_file_list(self, path, fake_path):
         files = self.file_ranking(path)
-        text = ["- [.]({fake_path}/..)"]
+        last_directory = "/".join(fake_path.split('/')[:-1])
+        text = [f"- [.](/drive/{last_directory})"]
         for f in files:
             f = os.path.splitext(f)[0]
             text.append(f"- [{f}](/drive/{fake_path}/{f})")
