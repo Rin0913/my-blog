@@ -14,7 +14,7 @@ app = Flask(__name__)
 def home():
     html = controller.access(config.home_page)
     files = rank_engine.ranking(config.blog_folder)
-    html = controller.generate_list(files, files[0] if len(files) else "", html)
+    html = controller.generate_list(files, "", html)
     return html
 
 @app.route('/about')

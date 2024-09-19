@@ -18,11 +18,14 @@ class controller():
     def generate_list(self, all_files, title, origin_html):
         lst = []
 
+        idx = len(all_files) - 3
         if title in all_files:
             idx = all_files.index(title)
-            f = lambda x: os.path.splitext(x)[0]
-            for i in range(-2, 4):
-                if 0 <= idx + i < len(all_files): lst.append(f(all_files[idx + i]))
+        
+        f = lambda x: os.path.splitext(x)[0]
+        for i in range(-2, 4):
+            if i == idx: continue
+            if 0 <= idx + i < len(all_files): lst.append(f(all_files[idx + i]))
         html_text = []
 
         for f in lst:
