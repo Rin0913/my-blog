@@ -84,7 +84,6 @@ class rank_engine():
         last_directory = "/".join(fake_path.split('/')[:-1])
         text = [f"- [.](/drive/{last_directory})"]
         for f in files:
-            f = os.path.splitext(f)[0]
             text.append(f"- [{f}](/drive/{fake_path}/{f})")
         return "\n".join(text)
 
