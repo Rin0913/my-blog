@@ -30,7 +30,7 @@ class controller():
         html_text = []
 
         for f in lst:
-            html_text.append(f"- [{f}](/a/{f})")
+            html_text.append(f"- [{f.replace('_', ' ')}](/a/{f})")
         html_text = self.md_engine.markdown_to_html("\n".join(html_text))
         if html_text: html_text = "<hr/>" + html_text
         return origin_html.replace("<flask-list>", html_text)
@@ -75,7 +75,7 @@ class rank_engine():
             if os.path.splitext(f)[1] != '.md':
                 continue
             f = os.path.splitext(f)[0]
-            text.append(f"- [{f}](/a/{f})")
+            text.append(f"- [{f.replace('_', ' ')}](/a/{f})")
             no -= 1
         return "\n".join(text)
 
