@@ -6,15 +6,16 @@ class controller():
     def __init__(self, md_engine):
         self.md_engine = md_engine
 
-    def generate(self, markdown_text):
+    def generate(self, markdown_text, title = ""):
         intermediate_output = self.md_engine.markdown_to_html(markdown_text)
-        return self.md_engine.generate_html(intermediate_output)
+        return self.md_engine.generate_html(intermediate_output, title)
         
     def access(self, markdown_path):
         md_text = ""
+        md_name = os.path.splitext(os.path.basename(markdown_path))[0]
         with open(markdown_path, 'r') as f:
             md_text = f.read()
-        return self.generate(md_text)
+        return self.generate(md_text, md_name)
 
     def generate_list(self, all_files, title, origin_html):
         html_text = []
@@ -48,11 +49,18 @@ class md_engine():
         output = renderer.render(ast)
         return output
 
-    def generate_html(self, intermediate_output):
+    def generate_html(self, intermediate_output, title):
+        if title:
+            title = f"Rin 的網誌 - {title}"
+        else:
+            title = "Rin 的網誌"
+
         html_text = ""
         with open(self.template_html, 'r') as f:
             html_text = f.read()
-        return html_text.replace("<flask-render>", intermediate_output)
+        html_text = html_text.replace("<flask-render>", intermediate_output)
+        html_text = html_text.replace("<flask-title>", f"<title>{title}</title>")
+        return html_text
     
         
 class rank_engine():
