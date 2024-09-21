@@ -1,0 +1,77 @@
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	background: url('/s/background.jpg') no-repeat center center fixed;
+	background-size: cover;
+}
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+.container-p {
+	position: relative;
+	background: rgba(255, 255, 255, 0.7);
+	padding-bottom: 20px;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.content {
+	flex: 1;
+	padding: 20px;
+}
+
+.footer {
+	color: white;
+	text-align: center;
+	padding: 10px;
+	position: sticky;
+	top: 100vh;
+	align-items: flex-end;
+}
+
+.bottom-right-logo {
+	display: inline-block;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	width: 4%;
+}
+
+.line-group {
+	position: absolute;
+				margin-top: 20px;
+	bottom: 10px;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.line {
+	height: 4px;
+	width: 100px;
+	transform: skewX(-45deg);
+	margin: 0 5px;
+	background-color: rgba(var(--color, 255, 255, 255), 0.85);
+}
+
+.line[line-color="color1"] { --color: 255, 255, 255; }
+.line[line-color="color2"] { --color: 150, 95, 212; }
+.line[line-color="color3"] { --color: 29, 26, 47; }
+.line[line-color="color4"] { --color: 115, 79, 154; }
