@@ -3,7 +3,7 @@ home_page="template/home.md"
 about_page="template/about.md"
 index_page="template/index.md"
 blog_folder="blog/"
-drive_folder="/mnt/netdisk/www_drive/"
+drive_folder="drive/"
 base_url="https://sandb0x.tw"
 
 title_mapping = {
