@@ -1,5 +1,6 @@
 from flask import Flask, render_template, send_file, send_from_directory, abort
 import os
+import mimetypes
 import config
 import engine
 import pfilter
@@ -69,13 +70,22 @@ def blog(article):
 
 @app.route('/b/<string:article>')
 def browser(article):
+
+    def is_text_file(file_path):
+        mime_type, _ = mimetypes.guess_type(file_path)
+        if mime_type and mime_type.startswith('text'):
+            return True
+        return False
+
     path = pfilter.concatenate(config.share_folder, article)
     if path == None:
         abort(403)
     try:
-        html = controller.access(path)
-        html = controller.generate_list([], "", html)
-        return html
+        if is_text_file(path):
+            html = controller.access(path)
+            html = controller.generate_list([], "", html)
+            return html
+        return send_file(path, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
@@ -85,7 +95,7 @@ def download_resources(content):
     if path == None:
         abort(403)
     try:
-        return send_from_directory(path, content, as_attachment=True)
+        return send_from_directory(path, content, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
