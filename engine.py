@@ -39,8 +39,9 @@ class controller():
         return origin_html.replace("<flask-list>", html_text)
 
 class md_engine():
-    def __init__(self, template_html):
+    def __init__(self, template_html, title_mapping):
         self.template_html = template_html
+        self.title_mapping = title_mapping
 
     def markdown_to_html(self, markdown_text):
         parser = commonmark.Parser()
@@ -51,6 +52,8 @@ class md_engine():
 
     def generate_html(self, intermediate_output, title):
         if title:
+            if title in self.title_mapping:
+                title = self.title_mapping[title]
             title = f"Rin 的網誌 - {title}"
         else:
             title = "Rin 的網誌"

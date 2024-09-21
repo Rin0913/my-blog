@@ -4,7 +4,7 @@ import config
 import engine
 import pfilter
 
-md_engine = engine.md_engine(config.template_html)
+md_engine = engine.md_engine(config.template_html, config.title_mapping)
 controller = engine.controller(md_engine)
 rank_engine = engine.rank_engine()
 
@@ -32,7 +32,7 @@ def list():
 
 @app.route('/sitemap')
 def sitemap():
-    sitemap = ['/', '/about', '/list']
+    sitemap = ['/', '/index', '/about', '/list']
     for f in rank_engine.ranking(config.blog_folder):
         sitemap.append("/a/" + os.path.splitext(f)[0])
     result = []
