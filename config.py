@@ -1,6 +1,7 @@
 template_html="template/template.html"
 home_page="template/home.md"
 about_page="template/about.md"
+index_page="template/index.md"
 blog_folder="blog/"
 drive_folder="drive/"
 base_url="https://sandb0x.tw"
