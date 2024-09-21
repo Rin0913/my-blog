@@ -67,6 +67,18 @@ def blog(article):
     except FileNotFoundError:
         abort(404)
 
+@app.route('/b/<string:article>')
+def browser(article):
+    path = pfilter.concatenate(config.share_folder, article)
+    if path == None:
+        abort(403)
+    try:
+        html = controller.access(path)
+        html = controller.generate_list([], "", html)
+        return html
+    except FileNotFoundError:
+        abort(404)
+
 @app.route('/s/<string:content>')
 def download_resources(content):
     path = pfilter.concatenate("", "static")

@@ -4,6 +4,7 @@ about_page="template/about.md"
 index_page="template/index.md"
 blog_folder="blog/"
 drive_folder="drive/"
+share_folder="share/"
 base_url="https://sandb0x.tw"
 
 title_mapping = {
