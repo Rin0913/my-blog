@@ -21,6 +21,10 @@ def home():
 def about():
     return controller.access(config.about_page)
 
+@app.route('/index')
+def index():
+    return controller.access(config.index_page)
+
 @app.route('/list')
 def list():
     html = controller.generate(rank_engine.generate_markdown_list(config.blog_folder))
