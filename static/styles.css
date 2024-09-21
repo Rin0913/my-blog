@@ -1,22 +1,22 @@
 html, body {
-	height: 100%;
-	margin: 0;
+    height: 100%;
+    margin: 0;
 }
 
 body {
-	background: url('/s/background.jpg') no-repeat center center fixed;
-	background-size: cover;
+    background: url('/s/background.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 pre, code {
@@ -24,56 +24,57 @@ pre, code {
 }
 
 .container-p {
-	position: relative;
-	background: rgba(255, 255, 255, 0.7);
-	padding-bottom: 20px;
+    position: relative;
+    min-height: 35em;
+    background: rgba(255, 255, 255, 0.7);
+    padding-bottom: 8em;
 }
 
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .content {
-	flex: 1;
-	padding: 20px;
+    flex: 1;
+    padding: 20px;
 }
 
 .footer {
-	color: white;
-	text-align: center;
-	padding: 10px;
-	position: sticky;
-	top: 100vh;
-	align-items: flex-end;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: sticky;
+    top: 100vh;
+    align-items: flex-end;
 }
 
-.bottom-right-sign {
-	display: inline-block;
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
-	width: 6%;
+.bottom-right-logo {
+    display: inline-block;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 12%;
     opacity: 0.5;
 }
 
 .line-group {
-	position: absolute;
-	margin-top: 20px;
-	bottom: 10px;
-	left: 0;
-	right: 0;
-	display: flex;
-	justify-content: center;
+    position: absolute;
+    margin-top: 20px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .line {
-	height: 4px;
-	width: 100px;
-	transform: skewX(-45deg);
-	margin: 0 5px;
-	background-color: rgba(var(--color, 255, 255, 255), 0.85);
+    height: 4px;
+    width: 100px;
+    transform: skewX(-45deg);
+    margin: 0 5px;
+    background-color: rgba(var(--color, 255, 255, 255), 0.85);
 }
 
 .line[line-color="color1"] { --color: 255, 255, 255; }
