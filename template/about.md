@@ -16,6 +16,8 @@
 
 我的 Email 是 [contact[a]sandb0x.tw](mailto:contact@sandb0x.tw)；
 
+我的 Telegram 是 [k_rin0913](https://t.me/k_rin0913)；
+
 也可以加我的 [Facebook](https://www.facebook.com/profile.php?id=61565613403764)。
 
 

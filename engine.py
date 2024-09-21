@@ -1,4 +1,5 @@
 import commonmark
+import urllib.parse
 import os
 
 class controller():
@@ -16,21 +17,22 @@ class controller():
         return self.generate(md_text)
 
     def generate_list(self, all_files, title, origin_html):
+        html_text = []
         lst = []
 
-        idx = len(all_files) - 3
+        idx = min(4, len(all_files))
         if title in all_files:
             idx = all_files.index(title)
         
         f = lambda x: os.path.splitext(x)[0]
-        for i in range(-2, 4):
+        for i in range(-4, 3):
             if 0 <= idx + i < len(all_files):
                 if all_files[idx + i] == title: continue
                 lst.append(f(all_files[idx + i]))
-        html_text = []
 
         for f in lst:
-            html_text.append(f"- [{f.replace('_', ' ')}](/a/{f})")
+            furl = urllib.parse.quote(f)
+            html_text.append(f"- [{f.replace('_', ' ')}](/a/{furl})")
         html_text = self.md_engine.markdown_to_html("\n".join(html_text))
         if html_text: html_text = "<hr/>" + html_text
         return origin_html.replace("<flask-list>", html_text)
@@ -75,15 +77,18 @@ class rank_engine():
             if os.path.splitext(f)[1] != '.md':
                 continue
             f = os.path.splitext(f)[0]
-            text.append(f"- [{f.replace('_', ' ')}](/a/{f})")
+            furl = urllib.parse.quote(f)
+            text.append(f"- [{f.replace('_', ' ')}](/a/{furl})")
             no -= 1
         return "\n".join(text)
 
     def generate_file_list(self, path, fake_path):
+        fake_path = urllib.parse.quote(fake_path)
         files = self.file_ranking(path)
         last_directory = "/".join(fake_path.split('/')[:-1])
         text = [f"- [.](/drive/{last_directory})"]
         for f in files:
-            text.append(f"- [{f}](/drive/{fake_path}/{f})")
+            furl = urllib.parse.quote(f)
+            text.append(f"- [{f}](/drive/{fake_path}/{furl})")
         return "\n".join(text)
 
