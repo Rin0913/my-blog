@@ -1,7 +1,7 @@
 <div class="top-right-text">
     <p>也許……<p>
     <p class="text-padding1">我的誕生就是爲了要與你相遇。<p>
-    <p class="text-padding2">——渚薰</p>
+    <p class="text-padding2">——<a class="secret" onclick="openf()">渚薰</a></p>
     <hr />
 </div>
 
@@ -33,6 +33,10 @@
 <!-- 以下為一些外部引用以及設定 -->
 
 <style>
+
+.secret {
+    color: #333;
+}
 
 @font-face {
 	font-family: 'GenWanMin2TW';
@@ -88,3 +92,24 @@
 
 
 </style>
+
+<script>
+    var wille = document.querySelectorAll('.bottom-right-icon')[0];
+    function openf() {
+        // anti-crawler xD
+        window.location.href = atob("L2IvJUU4JTk2JUIwJUU1JTkyJThDJUU2JTg4JTkxJUU3JTlBJTg0JUU4JTg3JUFBJUU3JTk5JUJELm1kCg==");
+    }
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    async function recolor() {
+        let i = 0;
+        while(1) {
+            wille.style.filter = `hue-rotate(${i}deg)`
+            i += 1;
+            i %= 360;
+            await sleep(1200/i/i/i);
+        }
+    }
+    recolor();
+</script>

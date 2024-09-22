@@ -68,7 +68,7 @@ def blog(article):
     except FileNotFoundError:
         abort(404)
 
-@app.route('/b/<string:article>')
+@app.route('/b/<path:article>')
 def browser(article):
 
     def is_text_file(file_path):
@@ -78,6 +78,7 @@ def browser(article):
         return False
 
     path = pfilter.concatenate(config.share_folder, article)
+
     if path == None:
         abort(403)
     try:
@@ -89,13 +90,13 @@ def browser(article):
     except FileNotFoundError:
         abort(404)
 
-@app.route('/s/<string:content>')
-def download_resources(content):
-    path = pfilter.concatenate("", "static")
+@app.route('/s/<path:path>')
+def download_resources(path):
+    path = pfilter.concatenate("static/", path)
     if path == None:
         abort(403)
     try:
-        return send_from_directory(path, content, as_attachment=False)
+        return send_file(path, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
