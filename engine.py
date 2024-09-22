@@ -97,7 +97,7 @@ class rank_engine():
         fake_path = urllib.parse.quote(fake_path)
         files = self.file_ranking(path)
         last_directory = "/".join(fake_path.split('/')[:-1])
-        text = [f"- [.](/drive/{last_directory})"]
+        text = [f"- [..](/drive/{last_directory})"]
         for f in files:
             furl = urllib.parse.quote(f)
             text.append(f"- [{f}](/drive/{fake_path}/{furl})")

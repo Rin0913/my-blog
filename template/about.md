@@ -1,16 +1,16 @@
-# K Rin
-
-<div style="text-align: center;">
-    <img class="small-img" src="/s/shinji.jpg" alt="My anime avatar shin-chan(shinji ikari)">
+<div class="top-right-text">
+    <p>也許……<p>
+    <p class="text-padding1">我的誕生就是爲了要與你相遇。<p>
+    <p class="text-padding2">——渚薰</p>
+    <hr />
 </div>
+
+<div class="about-main">
+
+# K Rin
 
 你好，我是 K Rin。
 
-<div class="top-right-text">
-    <p>也許……<p>
-    <p class="text-padding1">我的誕生就是要與你相遇。<p>
-    <p class="text-padding2">——渚薰</p>
-</div>
 
 目前就讀資訊工程學系，擅長 Python，也會一點 C/C++，目前在研究演算法和作業系統。
 
@@ -24,8 +24,11 @@
 
 #### 參考
 
-- [私人雲端硬碟 <i class="fa-solid fa-download"></i>](/drive/)
 - [素材來源放 GitHub Repo 的 README](https://github.com/Rin0913/my-blog)
+
+<img class="bottom-right-icon" src="/s/WILLE.png">
+
+</div>
 
 <!-- 以下為一些外部引用以及設定 -->
 
@@ -33,18 +36,33 @@
 
 @font-face {
 	font-family: 'GenWanMin2TW';
-	src: url('/s/fonts/GenWanMin2TW-EL.otf') format('opentype');
+	src: url('/s/GenWanMin2TW-EL.otf') format('opentype');
 }
 
 .top-right-text {
     font-family: "GenWanMin2TW", serif;
     font-weight: 400;
     position: absolute;
-    top: 0;
+    top: 0.5em;
     right: 1em;
-    font-size: 18px;
+    font-size: 22px;
+    line-height: 1;
     color: #333;
     padding: 13px 13px;
+}
+
+.bottom-right-icon {
+    display: inline-block;
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    min-width: 130px;
+    width: 12%;
+    opacity: 0.8;
+}
+
+.bottom-right-logo {
+    display: none;
 }
 
 .text-padding1 {
@@ -58,5 +76,15 @@
 .small-img {
     width: 20%;
 }
+
+@media (max-width: 1200px) {
+    .small-img {
+        display: none;
+    }
+    .about-main {
+        padding-top: 10em;
+    }
+}
+
 
 </style>

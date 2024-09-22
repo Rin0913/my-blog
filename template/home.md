@@ -1,5 +1,5 @@
-<img class="warning" offset="n" src="/s/top_secret.png">
-<img class="warning" offset="y" src="/s/top_secret.png">
+<img class="warning" src="/s/top_secret.png">
+<img class="warning" src="/s/top_secret.png">
 
 # K Rin 的網站
 
@@ -26,10 +26,10 @@
 	animation: stamp 0.10s ease-in forwards;
 	animation-delay: 1.2s;
     position: absolute;
-    width: 12%;
+    width: 14%;
 	min-width: 130px;
 	left: 70%;
-	top: 13%;
+	top: 37%;
 }
 
 
