@@ -1,5 +1,5 @@
-<img id="stamp" class="warning" offset="n" src="/s/top_secret.png">
-<img id="stamp" class="warning" offset="y" src="/s/top_secret.png">
+<img class="warning" offset="n" src="/s/top_secret.png">
+<img class="warning" offset="y" src="/s/top_secret.png">
 
 # K Rin 的網站
 
@@ -28,11 +28,27 @@
     position: absolute;
     width: 12%;
 	min-width: 130px;
-	transform: var(--offset, rotate( 11deg));
 	left: 70%;
 	top: 13%;
 }
 
-.warning[offset="y"] { --offset: translate(2px, 2px) rotate(13deg) };
 
 </style>
+
+<script>
+	let base = window.screen.width / 10;
+	let randint1 = Math.floor(Math.random() * base) - base / 2; 
+	let randint2 = Math.floor(Math.random() * base) - base / 2; 
+	let randint3 = Math.floor(Math.random() * 41) - 20;
+    const stamps = document.querySelectorAll('.warning');
+	stamps.forEach(stamp => {
+		const stampStyle = window.getComputedStyle(stamp);
+		let stampTop = parseInt(stampStyle.top);
+		let stampLeft = parseInt(stampStyle.left);
+		stamp.style.top = (stampTop + randint1) + 'px';
+		stamp.style.left = (stampLeft + randint2) + 'px';
+		stamp.style.transform = `rotate(${randint3}deg)`;
+		randint3 += 1 + Math.round(Math.random() * 2);
+		
+	});
+</script>

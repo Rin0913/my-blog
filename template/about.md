@@ -25,22 +25,23 @@
 #### 參考
 
 - [私人雲端硬碟 <i class="fa-solid fa-download"></i>](/drive/)
-- [網站背景圖片來源](https://www.zerochan.net/3483232)
+- [素材來源放 GitHub Repo 的 README](https://github.com/Rin0913/my-blog)
 
 <!-- 以下為一些外部引用以及設定 -->
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
 <style>
 
+@font-face {
+	font-family: 'GenWanMin2TW';
+	src: url('/s/fonts/GenWanMin2TW-EL.otf') format('opentype');
+}
+
 .top-right-text {
-    font-family: "Zen Old Mincho", serif;
-    font-weight: 500;
+    font-family: "GenWanMin2TW", serif;
+    font-weight: 400;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 1em;
     font-size: 18px;
     color: #333;
     padding: 13px 13px;
