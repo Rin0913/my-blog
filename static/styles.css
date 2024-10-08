@@ -8,11 +8,23 @@ body {
     background-size: cover;
 }
 
-img {
+img, iframe {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 50%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+iframe {
+    aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 768px) {
+  img, iframe {
     width: 100%;
+  }
 }
 
 a {
@@ -23,6 +35,11 @@ pre, code {
     opacity: 0.85;
 }
 
+h1, h2, h3, h4, h5 {
+    padding-top: 0.1em;
+    padding-bottom: 0.5em;
+}
+
 .nav-item {
     margin-left: 0.5em;
 }
@@ -31,7 +48,7 @@ pre, code {
     position: relative;
     min-height: 30em;
     background: rgba(255, 255, 255, 0.7);
-    padding-bottom: 7em;
+    padding-bottom: 9em;
 }
 
 .wrapper {

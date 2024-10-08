@@ -17,7 +17,7 @@ class controller():
             md_text = f.read()
         return self.generate(md_text, md_name)
 
-    def generate_list(self, all_files, title, origin_html):
+    def generate_list(self, all_files, title, origin_html, nums = 2):
         html_text = []
         lst = []
 
@@ -26,7 +26,7 @@ class controller():
             idx = all_files.index(title)
         
         f = lambda x: os.path.splitext(x)[0]
-        for i in range(-4, 3):
+        for i in range(-nums // 2, nums - nums // 2):
             if 0 <= idx + i < len(all_files):
                 if all_files[idx + i] == title: continue
                 lst.append(f(all_files[idx + i]))
@@ -51,18 +51,25 @@ class md_engine():
         return output
 
     def generate_html(self, intermediate_output, title):
+        seo_meta = ""
         if title:
             if title in self.title_mapping:
                 title = self.title_mapping[title]
+            title = title.replace("_", " ")
+            seo_meta += f'<meta name="description" content="{title}">'
+            seo_meta += f'<meta property="og:description" content="{title}">'
             title = f"Rin 的網誌 - {title}"
+            seo_meta += f'<meta property="og:title" content="{title}">'
+            seo_meta += f'<flask-meta>'
         else:
             title = "Rin 的網誌"
-
+        
         html_text = ""
         with open(self.template_html, 'r') as f:
             html_text = f.read()
         html_text = html_text.replace("<flask-render>", intermediate_output)
         html_text = html_text.replace("<flask-title>", f"<title>{title}</title>")
+        html_text = html_text.replace("<flask-meta>", seo_meta)
         return html_text
     
         
@@ -94,12 +101,14 @@ class rank_engine():
         return "\n".join(text)
 
     def generate_file_list(self, path, fake_path):
+        if fake_path:
+            fake_path += '/'
         fake_path = urllib.parse.quote(fake_path)
         files = self.file_ranking(path)
         last_directory = "/".join(fake_path.split('/')[:-1])
         text = [f"- [..](/drive/{last_directory})"]
         for f in files:
             furl = urllib.parse.quote(f)
-            text.append(f"- [{f}](/drive/{fake_path}/{furl})")
+            text.append(f"- [{f}](/drive/{fake_path}{furl})")
         return "\n".join(text)
 

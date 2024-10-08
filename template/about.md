@@ -34,6 +34,10 @@
 
 <style>
 
+.about-main {
+    padding-bottom: 5em;
+}
+
 .secret {
     color: #333;
 }

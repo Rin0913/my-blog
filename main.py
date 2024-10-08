@@ -1,9 +1,10 @@
-from flask import Flask, render_template, send_file, send_from_directory, abort
+from flask import Flask, render_template, send_file, send_from_directory, abort, request
 import os
 import mimetypes
 import config
 import engine
 import pfilter
+import json
 
 md_engine = engine.md_engine(config.template_html, config.title_mapping)
 controller = engine.controller(md_engine)
@@ -15,7 +16,7 @@ app = Flask(__name__)
 def home():
     html = controller.access(config.home_page)
     files = rank_engine.ranking(config.blog_folder)
-    html = controller.generate_list(files, "", html)
+    html = controller.generate_list(files, "", html, 10)
     return html
 
 @app.route('/about')
@@ -31,16 +32,25 @@ def list():
     html = controller.generate(rank_engine.generate_markdown_list(config.blog_folder))
     return html
 
-@app.route('/sitemap')
+@app.route('/sitemap.xml')
 def sitemap():
     sitemap = ['/', '/index', '/about', '/list']
     for f in rank_engine.ranking(config.blog_folder):
         sitemap.append("/a/" + os.path.splitext(f)[0])
-    result = []
+    result = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
     for i in sitemap:
-        result.append(config.base_url + i)
-    return '\n'.join(result)
+        result += f'<url><loc>{config.base_url + i}</loc><changefreq>weekly</changefreq></url>'
+    result += "</urlset>"
+    return result
 
+@app.route('/robots.txt')
+def robots():
+    try:
+        with open(config.robots_txt) as f:
+            return f.read()
+    except FileNotFoundError:
+        abort(404)
+    
 @app.route('/drive/', defaults={'subpath': ''})
 @app.route('/drive/<path:subpath>')
 def download(subpath):
@@ -99,6 +109,21 @@ def download_resources(path):
         return send_file(path, as_attachment=False)
     except FileNotFoundError:
         abort(404)
+
+@app.after_request
+def add_url(response):
+    if 499 >= response.status_code >= 400:
+        html = controller.access(config.error404_page)
+        files = rank_engine.ranking(config.blog_folder)
+        html = controller.generate_list(files, "", html, 10)
+        response.set_data(html)
+
+    if 'text/html' in response.content_type:
+        url = request.url_root.rstrip('/') + request.path
+        html = response.get_data(as_text=True)
+        html = html.replace("<flask-meta>", f'<link rel="canonical" href="{url}" />')
+        response.set_data(html)
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)
